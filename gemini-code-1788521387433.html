@@ -6,42 +6,99 @@
     <title>My Online Shop</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background-color: #f4f4f9; padding: 20px; }
-        header { text-align: center; padding: 20px 0; background: #232f3e; color: white; border-radius: 8px; margin-bottom: 20px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        body { background-color: #f4f4f9; }
+        
+        /* Navigation Bar */
+        nav { background: #131921; color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
+        nav .logo { font-size: 1.4rem; font-weight: bold; color: #f3a847; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a { color: white; text-decoration: none; font-size: 0.95rem; }
+        nav ul li a:hover { color: #f3a847; }
+
+        header { text-align: center; padding: 30px 20px; background: #232f3e; color: white; margin-bottom: 20px; }
+        
+        .container { padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
         .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
         .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
         .card h3 { margin: 10px 0; font-size: 1.1rem; }
         .price { color: #b12704; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
         .btn { background: #ffd814; border: 1px solid #fcd200; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; }
         .btn:hover { background: #f7ca00; }
+
+        /* Payment Modal Popup */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 25px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; }
+        .pay-option { background: #e7f3ff; padding: 10px; border-radius: 6px; margin: 10px 0; text-align: left; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
+<!-- Navigation Menu -->
+<nav>
+    <div class="logo">Akk Shop</div>
+    <ul>
+        <li><a href="#">ပင်မစာမျက်နှာ</a></li>
+        <li><a href="#products">ပစ္စည်းများ</a></li>
+        <li><a href="#payment">ငွေချေနည်း</a></li>
+        <li><a href="#contact">ဆက်သွယ်ရန်</a></li>
+    </ul>
+</nav>
+
 <header>
-    <h1>Welcome to My Store</h1>
-    <p>လူကြိုက်များသော ပစ္စည်းများကို တစ်နေရာတည်းမှာ ဝယ်ယူပါ</p>
+    <h1>Welcome to Akk Online Shop</h1>
+    <p>လူကြိုက်များသော ပစ္စည်းများကို စျေးနှုန်းချိုသာစွာဖြင့် ဝယ်ယူနိုင်ပါပြီ</p>
 </header>
 
-<div class="product-grid">
-    <div class="card">
-        <img src="https://via.placeholder.com/200" alt="Product 1">
-        <h3>Product Item 1</h3>
-        <p class="price">15,000 MMK</p>
-        <button class="btn" onclick="buyItem('Product Item 1')">ဝယ်ယူမည်</button>
+<div class="container" id="products">
+    <div class="product-grid">
+        <div class="card">
+            <img src="https://picsum.photos/200/180?random=1" alt="Product 1">
+            <h3>Product Item 1</h3>
+            <p class="price">15,000 MMK</p>
+            <button class="btn" onclick="openPayment('Product Item 1', '15,000 MMK')">ဝယ်ယူမည်</button>
+        </div>
+        <div class="card">
+            <img src="https://picsum.photos/200/180?random=2" alt="Product 2">
+            <h3>Product Item 2</h3>
+            <p class="price">25,000 MMK</p>
+            <button class="btn" onclick="openPayment('Product Item 2', '25,000 MMK')">ဝယ်ယူမည်</button>
+        </div>
     </div>
-    <div class="card">
-        <img src="https://via.placeholder.com/200" alt="Product 2">
-        <h3>Product Item 2</h3>
-        <p class="price">25,000 MMK</p>
-        <button class="btn" onclick="buyItem('Product Item 2')">ဝယ်ယူမည်</button>
+</div>
+
+<!-- Payment Popup Modal -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePayment()">&times;</span>
+        <h3 id="modalTitle">ငွေရှင်းရန်</h3>
+        <p id="modalPrice" style="color: #b12704; font-weight: bold; margin: 10px 0;"></p>
+        
+        <div class="pay-option" id="payment">
+            <strong>KBZPay / WavePay Account:</strong><br>
+            09-XXXXXXXXX (Name: Akk Shop)
+        </div>
+
+        <p style="font-size: 0.85rem; color: #555; margin-top: 10px;">
+            ငွေလွှဲပြီးပါက ပြေစာ (Screenshot) ကို Telegram မှတစ်ဆင့် ပေးပို့ပေးပါရန်။
+        </p>
+        <br>
+        <a id="telegramLink" href="https://t.me/your_telegram_username" target="_blank" style="text-decoration: none;">
+            <button class="btn" style="background: #0088cc; color: white; border: none;">Telegram မှမှာယူမည်</button>
+        </a>
     </div>
 </div>
 
 <script>
-    function buyItem(name) {
-        alert(name + " ကို ရွေးချယ်ထားပါသည်။");
+    function openPayment(name, price) {
+        document.getElementById('modalTitle').innerText = name + " ဝယ်ယူရန်";
+        document.getElementById('modalPrice').innerText = "ကျသင့်ငွေ - " + price;
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    function closePayment() {
+        document.getElementById('paymentModal').style.display = 'none';
     }
 </script>
 
