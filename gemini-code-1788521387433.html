@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Online Shop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #f4f4f9; padding: 20px; }
+        header { text-align: center; padding: 20px 0; background: #232f3e; color: white; border-radius: 8px; margin-bottom: 20px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
+        .card h3 { margin: 10px 0; font-size: 1.1rem; }
+        .price { color: #b12704; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+        .btn { background: #ffd814; border: 1px solid #fcd200; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; }
+        .btn:hover { background: #f7ca00; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to My Store</h1>
+    <p>လူကြိုက်များသော ပစ္စည်းများကို တစ်နေရာတည်းမှာ ဝယ်ယူပါ</p>
+</header>
+
+<div class="product-grid">
+    <div class="card">
+        <img src="https://via.placeholder.com/200" alt="Product 1">
+        <h3>Product Item 1</h3>
+        <p class="price">15,000 MMK</p>
+        <button class="btn" onclick="buyItem('Product Item 1')">ဝယ်ယူမည်</button>
+    </div>
+    <div class="card">
+        <img src="https://via.placeholder.com/200" alt="Product 2">
+        <h3>Product Item 2</h3>
+        <p class="price">25,000 MMK</p>
+        <button class="btn" onclick="buyItem('Product Item 2')">ဝယ်ယူမည်</button>
+    </div>
+</div>
+
+<script>
+    function buyItem(name) {
+        alert(name + " ကို ရွေးချယ်ထားပါသည်။");
+    }
+</script>
+
+</body>
+</html>
